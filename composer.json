@@ -1,0 +1,14 @@
+{
+    "name": "sblaisot/topline",
+    "description": "The topline plugin let you add information into the roundcube topline.",
+    "license": "GPL-3.0+",
+    "type": "roundcube-plugin",
+    "homepage": "https://github.com/sblaisot/roundcube-topline",
+    "authors": [
+        {
+            "name": "Sébastien Blaisot",
+            "email": "sebastien@blaisot.org",
+            "role": "Developer"
+        }
+    ] 
+}
