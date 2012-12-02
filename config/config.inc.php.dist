@@ -1,0 +1,25 @@
+<?php
+
+/* Following preferences let you control the content of the topline
+ * on left, center and right parts
+ * 
+ * The following keywords are allowed :
+ *
+ * - 'username' -> Show roundcube username
+ * - 'mail_host' -> mail host against which authentication was done
+ * - 'email' -> email of default's identity
+ * - 'full_name' -> full name of default's identity
+ * - 'lastlogin' -> date/time of previous login
+ * - 'any text' -> the text you entered
+ *
+ */
+
+
+$rcmail_config['topline_left_content'] = array('Topline plugin enabled');
+$rcmail_config['topline_center_content'] = array('full_name', ' - ', 'lastlogin');
+$rcmail_config['topline_right_content'] = array('email');
+
+/* hide username showed by default in larry's topline */
+$rcmail_config['topline_hide_username'] = TRUE;
+
+?>
