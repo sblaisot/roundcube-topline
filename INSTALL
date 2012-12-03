@@ -12,8 +12,8 @@ The topline plugin has been tested against roundcube 0.8.4 and is designed to wo
 
 1. Uncompress it and move it to the roundcube plugins dir :
 
-    tar xvjf roundcube-topline-0.0.4.tar.gz
-    mv roundcube-topline-0.0.4 <path_to_roundcube>/plugins/topline
+    tar xvjf roundcube-topline-0.0.5.tar.gz
+    mv roundcube-topline-0.0.5 <path_to_roundcube>/plugins/topline
 
 2. Apply patch to your roundcube installation
    Don't be affraid by name of the patch, it has been tested against roundcube 0.8.4 as well as 0.8.3
