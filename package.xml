@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>topline</name>
+ <channel>pear.roundcube.net</channel>
+ <summary>The topline plugin let you add information into the roundcube topline.</summary>
+ <description>Simple plugin to add information in the roundcube topline
+ </description>
+ <lead>
+  <name>Sebastien Blaisot</name>
+  <user>sblaisot</user>
+  <email>sebastien@blaisot.org</email>
+  <active>yes</active>
+ </lead>
+ <date>2012-12-04</date>
+ <time>00:01:09</time>
+ <version>
+  <release>0.0.5</release>
+  <api>0.0.5</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.gnu.org/licenses/gpl-3.0.html">GNU GPLv3+</license>
+ <notes>
+v0.0.5 :
+* Add installation instructions
+ </notes>
+ <contents>
+  <dir baseinstalldir="/" name="/">
+   <dir name="config">
+    <file name="config.inc.php.dist" role="cfg" />
+   </dir> <!-- /config -->
+   <dir name="localization">
+    <file name="en_EN.inc" role="data" />
+    <file name="en_US.inc" role="data" />
+    <file name="fr_FR.inc" role="data" />
+   </dir> <!-- /localization -->
+   <dir name="roundcube-patch">
+    <file name="roundcube-topline-0.8.3.patch" role="data" />
+   </dir> <!-- /roundcube-patch -->
+   <file name="Changelog" role="doc" />
+   <file name="composer.json" role="data" />
+   <file name="INSTALL" role="doc" />
+   <file name="LICENSE" role="doc" />
+   <file name="README.md" role="doc" />
+   <file name="topline.php" role="php" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.1.4</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0</min>
+   </pearinstaller>
+   <package>
+    <name>PEAR</name>
+    <channel>pear.php.net</channel>
+    <min>1.4.0</min>
+   </package>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.0.5</release>
+    <api>0.0.5</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2012-12-04</date>
+   <license uri="http://www.gnu.org/licenses/gpl-3.0.html">GNU GPLv3+</license>
+   <notes>
+v0.0.5 :
+* Add installation instructions
+   </notes>
+  </release>
+ </changelog>
+</package>

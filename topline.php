@@ -9,7 +9,7 @@
  * Simple plugin to add information to the topline of the interface
  * of the roundcube webmail.
  *
- * @version 0.0.4
+ * @version 0.0.5
  * @author Sebastien Blaisot <sebastien@blaisot.org>
  * @website https://github.com/sblaisot/roundcube-topline
  * @licence http://www.gnu.org/licenses/gpl-3.0.html GNU GPLv3+
