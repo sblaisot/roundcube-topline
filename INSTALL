@@ -1,0 +1,37 @@
+Look at https://github.com/sblaisot/roundcube-topline
+
+Installing topline plugin
+-------------------------
+
+You need roundcube >= 0.8 installed.
+
+The topline plugin has been tested against roundcube 0.8.4 and is designed to work with larry skin.
+
+0. Download the latest version archive from
+   https://github.com/sblaisot/roundcube-topline/tags
+
+1. Uncompress it and move it to the roundcube plugins dir :
+
+    tar xvjf roundcube-topline-0.0.4.tar.gz
+    mv roundcube-topline-0.0.4 <path_to_roundcube>/plugins/topline
+
+2. Apply patch to your roundcube installation
+   Don't be affraid by name of the patch, it has been tested against roundcube 0.8.4 as well as 0.8.3
+
+    cd <path_to_roundcube>
+    patch -p 1 < plugins/topline/roundcube-patch/roundcube-topline-0.8.3.patch
+
+3. Add "topline" to the plugins list in <path_to_roundcube>/config/main.inc.php, for example :
+
+    $rcmail_config['plugins'] = array('topline',);
+
+It works :)
+
+
+Configuration
+-------------
+
+You can customize some settings :
+
+    copy config/config.inc.php.dist to config/config.inc.php
+    edit config/config.inc.php to suit your needs
