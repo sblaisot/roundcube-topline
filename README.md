@@ -7,7 +7,7 @@ This is a Simple plugin to add information to the topline of the roundcube webma
 
 In order for this plugin to work, it needs some containers into the topline.
 as of roundcube 0.8.3, this containers doesn't exist yet.
-A patch has been proposed na dincluded in the upcoming 0.9-beta
+A patch has been proposed and included in the upcoming 0.9-beta
 http://trac.roundcube.net/ticket/1488846
 You can find the patch in the roundcube-patch directory.
 You will have to apply this patch against your 0.8.x roundcube installation in order for this plugin to work.
