@@ -5,6 +5,7 @@
     http://pear.php.net/dtd/package-2.0.xsd">
  <name>topline</name>
  <channel>pear.roundcube.net</channel>
+ <uri>https://github.com/sblaisot/roundcube-topline</uri>
  <summary>The topline plugin let you add information into the roundcube topline.</summary>
  <description>Simple plugin to add information in the roundcube topline
  </description>
