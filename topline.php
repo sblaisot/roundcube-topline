@@ -34,6 +34,48 @@ class topline extends rcube_plugin
         if (rcmail::get_instance()->config->get('topline_hide_username', true))
             $this->add_hook('template_object_username', array($this, 'hide_username'));
     }
+
+    private function get_weather($location, $unit)
+    {
+	$rcmail = rcmail::get_instance();
+
+	/* Fetch weather feed */
+        $weather_feed = file_get_contents("http://weather.yahooapis.com/forecastrss?w=$location&u=$unit");
+        if(!$weather_feed) return Q($this->gettext('error_loading_weather_feed'));
+
+	/* Decode weather feed */
+        $weather = simplexml_load_string($weather_feed);
+
+        $channel_yweather = $weather->channel->children("http://xml.weather.yahoo.com/ns/rss/1.0");
+        foreach($channel_yweather as $x => $channel_item)
+                foreach($channel_item->attributes() as $k => $attr)
+                        $yw_channel[$x][$k] = $attr;
+
+        foreach($channel_yweather->location as $x => $location_item)
+                foreach($location_item->attributes() as $k => $attr)
+                	$yw_location[$k] = $attr;
+
+        $item_yweather = $weather->channel->item->children("http://xml.weather.yahoo.com/ns/rss/1.0");
+
+        foreach($item_yweather as $x => $yw_item) {
+                foreach($yw_item->attributes() as $k => $attr) {
+                        if($k == 'day') $day = $attr;
+                        if($x == 'forecast') { $yw_forecast[$x][$day . ''][$k] = $attr; }
+                        else { $yw_forecast[$x][$k] = $attr; }
+                }
+	}
+
+	/* Construct weather string */
+        $weather_string = "";
+	if ($rcmail->config->get('topline_weather_show_location', true)) {
+        	$weather_string .= Q((string)$yw_location[city].", ".(string)$yw_location[country]);
+	}
+	if ($rcmail->config->get('topline_weather_show_icon', true)){
+        	$weather_string .= "&nbsp;<img style=\"width:15px;height:15px;vertical-align:middle\" src=\"plugins/topline/".$this->local_skin_path()."/images/".(string)$yw_forecast[condition][code].".gif\">&nbsp;";
+	}
+	$weather_string .= Q((string)$yw_forecast[condition][temp]."°".strtoupper($unit).", ".(string)$yw_forecast[condition][text]);
+	return $weather_string;
+    }
     
     private function get_content($what)
     {
@@ -45,22 +87,25 @@ class topline extends rcube_plugin
         foreach ($what as &$value) {
             switch ($value) {
                 case 'username':
-                    $content.=$user->data['username'];
+                    $content.=Q($user->data['username']);
                     break;
                 case 'mail_host':
-                    $content.=$user->data['mail_host'];
+                    $content.=Q($user->data['mail_host']);
                     break;
                 case 'email':
-                    $content.=$identity['email'];
+                    $content.=Q($identity['email']);
                     break;
                 case 'full_name':
-                    $content.=$identity['name'];
+                    $content.=Q($identity['name']);
                     break;
                 case 'lastlogin':
-                    $content.=$this->gettext('lastlogin').$_SESSION['lastlogin'];
+                    $content.=Q($this->gettext('lastlogin').$_SESSION['lastlogin']);
+                    break;
+                case 'weather':
+                    $content.=$this->get_weather($rcmail->config->get('topline_weather_WOEID', true),$rcmail->config->get('topline_weather_unit', true));
                     break;
                 default:
-                    $content.=$value;
+                    $content.=Q($value);
             }
         }
             return $content;
@@ -83,13 +128,13 @@ class topline extends rcube_plugin
         $rcmail = rcmail::get_instance();
         switch ($p['name']) {
             case 'topline-left':
-                return array('content' => $p['content'].Q($this->get_content($rcmail->config->get('topline_left_content', true))));
+                return array('content' => $p['content'].$this->get_content($rcmail->config->get('topline_left_content', true)));
                 break;
             case 'topline-center':
-                return array('content' => $p['content'].Q($this->get_content($rcmail->config->get('topline_center_content', true))));
+                return array('content' => $p['content'].$this->get_content($rcmail->config->get('topline_center_content', true)));
                 break;
             case 'topline-right':
-                return array('content' => $p['content'].Q($this->get_content($rcmail->config->get('topline_right_content', true))));
+                return array('content' => $p['content'].$this->get_content($rcmail->config->get('topline_right_content', true)));
                 break;
         }
     }

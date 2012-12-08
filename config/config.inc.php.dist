@@ -10,16 +10,30 @@
  * - 'email' -> email of default's identity
  * - 'full_name' -> full name of default's identity
  * - 'lastlogin' -> date/time of previous login
+ * - 'weather' -> Weather conditions (configure location and unit with below preferences)
  * - 'any text' -> the text you entered
  *
  */
 
 
-$rcmail_config['topline_left_content'] = array('Topline plugin enabled');
+$rcmail_config['topline_left_content'] = array('weather');
 $rcmail_config['topline_center_content'] = array('full_name', ' - ', 'lastlogin');
 $rcmail_config['topline_right_content'] = array('email');
 
 /* hide username showed by default in larry's topline */
 $rcmail_config['topline_hide_username'] = TRUE;
+
+/* Location for weather conditions */
+/* Find it on yahoo weather */
+$rcmail_config['topline_weather_WOEID'] = "619163";
+
+/* Weather unit (c for celsius or f for farenheit) */
+$rcmail_config['topline_weather_unit'] = "c";
+
+/* Show location (city and country) when displaying weather */
+$rcmail_config['topline_weather_show_location'] = TRUE;
+
+/* Show icon when displaying weather */
+$rcmail_config['topline_weather_show_icon'] = TRUE;
 
 ?>
