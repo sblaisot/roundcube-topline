@@ -38,6 +38,7 @@ v0.0.5 :
    <dir name="localization">
     <file name="en_EN.inc" role="data" />
     <file name="en_US.inc" role="data" />
+    <file name="es_ES.inc" role="data" />
     <file name="fr_FR.inc" role="data" />
    </dir> <!-- /localization -->
    <dir name="roundcube-patch">
