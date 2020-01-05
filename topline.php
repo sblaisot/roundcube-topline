@@ -84,6 +84,7 @@ class topline extends rcube_plugin
         $identity = $user->get_identity();
         $content="";
         $mpty=1;
+        if(!is_array($what)) $what = array($what);
         foreach ($what as &$value) {
             switch ($value) {
                 case 'username':
