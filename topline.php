@@ -41,7 +41,7 @@ class topline extends rcube_plugin
 
 	/* Fetch weather feed */
         $weather_feed = file_get_contents("http://weather.yahooapis.com/forecastrss?w=$location&u=$unit");
-        if(!$weather_feed) return Q($this->gettext('error_loading_weather_feed'));
+        if(!$weather_feed) return rcube_utils::rep_specialchars_output($this->gettext('error_loading_weather_feed'));
 
 	/* Decode weather feed */
         $weather = simplexml_load_string($weather_feed);
@@ -68,12 +68,12 @@ class topline extends rcube_plugin
 	/* Construct weather string */
         $weather_string = "";
 	if ($rcmail->config->get('topline_weather_show_location', true)) {
-        	$weather_string .= Q((string)$yw_location[city].", ".(string)$yw_location[country]);
+        	$weather_string .= rcube_utils::rep_specialchars_output((string)$yw_location[city].", ".(string)$yw_location[country]);
 	}
 	if ($rcmail->config->get('topline_weather_show_icon', true)){
         	$weather_string .= "&nbsp;<img style=\"width:15px;height:15px;vertical-align:middle\" src=\"plugins/topline/".$this->local_skin_path()."/images/".(string)$yw_forecast[condition][code].".gif\">&nbsp;";
 	}
-	$weather_string .= Q((string)$yw_forecast[condition][temp]."°".strtoupper($unit).", ".(string)$yw_forecast[condition][text]);
+	$weather_string .= rcube_utils::rep_specialchars_output((string)$yw_forecast[condition][temp]."°".strtoupper($unit).", ".(string)$yw_forecast[condition][text]);
 	return $weather_string;
     }
     
@@ -84,28 +84,29 @@ class topline extends rcube_plugin
         $identity = $user->get_identity();
         $content="";
         $mpty=1;
+        if(!is_array($what)) $what = array($what);
         foreach ($what as &$value) {
             switch ($value) {
                 case 'username':
-                    $content.=Q($user->data['username']);
+                    $content.=rcube_utils::rep_specialchars_output($user->data['username']);
                     break;
                 case 'mail_host':
-                    $content.=Q($user->data['mail_host']);
+                    $content.=rcube_utils::rep_specialchars_output($user->data['mail_host']);
                     break;
                 case 'email':
-                    $content.=Q($identity['email']);
+                    $content.=rcube_utils::rep_specialchars_output($identity['email']);
                     break;
                 case 'full_name':
-                    $content.=Q($identity['name']);
+                    $content.=rcube_utils::rep_specialchars_output($identity['name']);
                     break;
                 case 'lastlogin':
-                    $content.=Q($this->gettext('lastlogin').$_SESSION['lastlogin']);
+                    $content.=rcube_utils::rep_specialchars_output($this->gettext('lastlogin').$_SESSION['lastlogin']);
                     break;
                 case 'weather':
                     $content.=$this->get_weather($rcmail->config->get('topline_weather_WOEID', true),$rcmail->config->get('topline_weather_unit', true));
                     break;
                 default:
-                    $content.=Q($value);
+                    $content.=rcube_utils::rep_specialchars_output($value);
             }
         }
             return $content;
